@@ -5,7 +5,7 @@ module.exports = {
     username: "root",
     password: "password",
     database: "nlw6",
-    logging: true,
+    // logging: true,
     entities: ["src/models/**/**.ts"],
     migrations: ["src/database/migrations/*.ts"],
     cli: {
