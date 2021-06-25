@@ -12,7 +12,7 @@ interface IUserRequest {
 }
 
 class CreateUserService {
-    async execute({name, cpf, password, email, admin}: IUserRequest) {
+    async execute({name, cpf, password, email, admin = false}: IUserRequest) {
         if (!email) {
             throw new AppError("Email incorreto", 400);
         }
