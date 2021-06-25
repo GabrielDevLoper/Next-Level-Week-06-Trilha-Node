@@ -3,9 +3,9 @@ import CreateUserService from "../service/CreateUserService";
 
 class CreateUserController {
     async store(req: Request, res: Response) {
-        const {name, email, admin} = req.body;
+        const {name,cpf, password ,email, admin} = req.body;
 
-        const user = await CreateUserService.execute({name, email, admin});
+        const user = await CreateUserService.execute({name, cpf, password, email, admin});
 
         return res.json(user);
     }

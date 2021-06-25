@@ -2,14 +2,17 @@ import {UserRepository} from "../repositories/UserRepository";
 import {getCustomRepository} from "typeorm";
 import {AppError} from "../errors/AppError";
 
+
 interface IUserRequest {
     name: string;
     email: string;
+    cpf: string;
+    password: string;
     admin?: boolean;
 }
 
 class CreateUserService {
-    async execute({name, email, admin}: IUserRequest) {
+    async execute({name, cpf, password, email, admin}: IUserRequest) {
         if (!email) {
             throw new AppError("Email incorreto", 400);
         }
@@ -17,7 +20,7 @@ class CreateUserService {
         const userRepository = getCustomRepository(UserRepository);
 
         const userAlreadyExists = await userRepository.findOne({
-            email
+            cpf
         });
 
         if (userAlreadyExists) {
@@ -26,9 +29,13 @@ class CreateUserService {
 
         const user = await userRepository.createAndSave({
             name,
+            cpf,
+            password,
             email,
             admin
         });
+
+        delete user.password;
 
         return user;
     }
