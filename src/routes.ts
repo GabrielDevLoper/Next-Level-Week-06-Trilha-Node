@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 // Imports dos Middlewares
+import {auth} from "./middlewares/auth";
 import {admin} from "./middlewares/admin";
 
 // Imports dos Controllers
@@ -13,8 +14,8 @@ const routes = Router();
 
 routes.post("/login", AuthenticateUserController.store);
 routes.post("/users", CreateUserController.store);
-routes.post("/tags", admin ,CreateTagController.store);
-routes.post("/compliments",  CreateComplimentController.store);
+routes.post("/tags", auth, admin, CreateTagController.store);
+routes.post("/compliments", admin, CreateComplimentController.store);
 
 
 
