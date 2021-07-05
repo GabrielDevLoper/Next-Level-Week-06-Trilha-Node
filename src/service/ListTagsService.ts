@@ -6,7 +6,9 @@ class ListTagsService {
     async execute(){
         const tagRepository = getCustomRepository(TagRepository);
 
-        const tags = await tagRepository.find();
+        const tags = await tagRepository.find({
+            take: 10
+        });
 
         return classToPlain(tags);
     }

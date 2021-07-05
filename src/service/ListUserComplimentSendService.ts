@@ -9,7 +9,8 @@ class ListUserComplimentSendService {
         const compliment = await complimentRepository.find({
             where: {
                 user_sender: id_user
-            }
+            },
+            take: 1
         });
 
         return compliment;
